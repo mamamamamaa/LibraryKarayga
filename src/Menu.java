@@ -36,14 +36,14 @@ public class Menu {
     public void userPubList(ArrayList<Customer> ourCus, int i) {
         ArrayList<Published> books = ourCus.get(i).getArrOfBooks();
         for (int j = 0; j < books.size(); j++) {
-            System.out.println("\t"+(j+1)+") "+books.get(j).getName()+ " - " + books.get(j).getAuthor()+ " - " + books.get(j).getYearOfRealise());
+            allPubPrint(books, j, j+1);
         }
     }
 
     public void addPublishedMenu(Scanner numb, Scanner text, Library lib){
 
         String name, author;
-        int year;
+        int year, pages, edition;
         System.out.println("\t1. Книга");
         System.out.println("\t2. Журнал");
         System.out.println("\t3. Автореферат");
@@ -59,7 +59,9 @@ public class Menu {
                 author = text.nextLine().trim();
                 System.out.print("\tРік релізу: ");
                 year = numb.nextInt();
-                lib.addPublished(new Published(name, author, year, TypeOfPublished.Book));
+                System.out.print("\tКількість сторінок: ");
+                pages = numb.nextInt();
+                lib.addPublished(new Book(name, author, year, TypeOfPublished.Book, pages));
                 System.out.println("Додано!");
                 break;
             case 2:
@@ -69,7 +71,9 @@ public class Menu {
                 author = text.nextLine().trim();
                 System.out.print("\tРік релізу: ");
                 year = numb.nextInt();
-                lib.addPublished(new Published(name, author, year, TypeOfPublished.Magazine));
+                System.out.print("\tНомер видання: ");
+                edition = numb.nextInt();
+                lib.addPublished(new Magazine(name, author, year, TypeOfPublished.Magazine, edition));
                 System.out.println("Додано!");
                 break;
             case 3:
@@ -170,7 +174,7 @@ public class Menu {
             case 1:
                 for (int i = 0, j = 1; i < ourPub.size(); i++) {
                     if(!ourPub.get(i).isTaken){
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        allPubPrint(ourPub, i, j);
                         j+=1;
                     }
                 }
@@ -178,7 +182,8 @@ public class Menu {
             case 2:
                 for (int i = 0, j=1; i < ourPub.size(); i++) {
                     if (ourPub.get(i).type == TypeOfPublished.Book && !ourPub.get(i).isTaken) {
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        Book book = (Book) ourPub.get(i);
+                        System.out.println("\t"+(j)+") Назва: "+book.getName()+ "\n\t   Автор: " + book.getAuthor()+ "\n\t   Рік випуску: " + book.getYearOfRealise()+"\n\t   Кількість сторінок: "+book.getNumbOfPages()+"\n");
                         j+=1;
                     }
                 }
@@ -186,7 +191,8 @@ public class Menu {
             case 3:
                 for (int i = 0, j=1; i < ourPub.size(); i++) {
                     if (ourPub.get(i).type == TypeOfPublished.Magazine && !ourPub.get(i).isTaken) {
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        Magazine mag = (Magazine) ourPub.get(i);
+                        System.out.println("\t"+(j)+") Назва: "+mag.getName()+ "\n\t   Автор: " + mag.getAuthor()+ "\n\t   Рік випуску: " + mag.getYearOfRealise()+"\n\t   Номер випуску: "+mag.getEditionNumber()+"\n");
                         j+=1;
                     }
                 }
@@ -194,7 +200,7 @@ public class Menu {
             case 4:
                 for (int i = 0, j=1; i < ourPub.size(); i++) {
                     if (ourPub.get(i).type == TypeOfPublished.Abstract && !ourPub.get(i).isTaken) {
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        System.out.println("\t"+(j+1)+") Назва: "+ourPub.get(j).getName()+ "\n\t   Автор: " + ourPub.get(j).getAuthor()+ "\n\t   Рік випуску: " + ourPub.get(j).getYearOfRealise()+"\n");
                         j+=1;
                     }
                 }
@@ -202,7 +208,7 @@ public class Menu {
             case 5:
                 for (int i = 0, j=1; i < ourPub.size(); i++) {
                     if (ourPub.get(i).type == TypeOfPublished.Newspaper && !ourPub.get(i).isTaken) {
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        System.out.println("\t"+(j+1)+") Назва: "+ourPub.get(j).getName()+ "\n\t   Автор: " + ourPub.get(j).getAuthor()+ "\n\t   Рік випуску: " + ourPub.get(j).getYearOfRealise()+"\n");
                         j+=1;
                     }
                 }
@@ -215,7 +221,22 @@ public class Menu {
         }
     }
 
+    private void allPubPrint(ArrayList<Published> ourPub, int i, int j) {
+        if(ourPub.get(i).type == TypeOfPublished.Book){
+            Book book = (Book) ourPub.get(i);
+            System.out.println("\t"+(j)+") Назва: "+book.getName()+ "\n\t   Автор: " + book.getAuthor()+ "\n\t   Рік випуску: " + book.getYearOfRealise()+"\n\t   Кількість сторінок: "+book.getNumbOfPages()+"\n");
+        } else if(ourPub.get(i).type == TypeOfPublished.Magazine){
+            Magazine mag = (Magazine) ourPub.get(i);
+            System.out.println("\t"+(j)+") Назва: "+mag.getName()+ "\n\t   Автор: " + mag.getAuthor()+ "\n\t   Рік випуску: " + mag.getYearOfRealise()+"\n\t   Номер випуску: "+mag.getEditionNumber()+"\n");
+        } else {
+            System.out.println("\t"+(j)+") Назва: "+ourPub.get(i).getName()+ "\n\t   Автор: " + ourPub.get(i).getAuthor()+ "\n\t   Рік випуску: " + ourPub.get(i).getYearOfRealise()+"\n");
+        }
+    }
+
     public void showTakenPubMenu(ArrayList<Customer> ourCus){
+        if (ourCus.size() == 0){
+            System.out.println("Всі видання на місці!");
+        }
         for (int i = 0; i < ourCus.size(); i++) {
             System.out.println("Користувач: "+ourCus.get(i).getName()+"\nЗаборогованність: ");
             userPubList(ourCus, i);
@@ -230,36 +251,52 @@ public class Menu {
 
         System.out.print("\tЯкий тип видання ви хочете побачити?\nВибір: ");
         int choice4 = numb.nextInt();
+        int j;
         switch (choice4) {
             case 1:
                 System.out.print("Введіть назву шуканого видання: ");
                 String template = text.nextLine().trim();
-                for (int i = 0, j = 1; i < ourPub.size(); i++) {
+                j = 1;
+                for (int i = 0; i < ourPub.size(); i++) {
                     if(ourPub.get(i).getName().toLowerCase().contains(template.toLowerCase()) && !ourPub.get(i).isTaken){
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        allPubPrint(ourPub, i, j);
                         j+=1;
                     }
+                }
+                if (j == 1) {
+                    System.out.println("Нажаль, за данним запитом нічого не було знайдено :(");
                 }
                 break;
             case 2:
                 System.out.print("Введіть автора шуканого видання: ");
                 String authorName = text.nextLine().trim();
-                for (int i = 0, j = 1; i < ourPub.size(); i++) {
+                j = 1;
+                for (int i = 0; i < ourPub.size(); i++) {
                     if(ourPub.get(i).getAuthor().toLowerCase().contains(authorName.toLowerCase()) && !ourPub.get(i).isTaken){
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        allPubPrint(ourPub, i, j);
                         j+=1;
                     }
+                }
+
+                if (j == 1) {
+                    System.out.println("Нажаль, за данним запитом нічого не було знайдено :(");
                 }
                 break;
             case 3:
                 System.out.print("Введіть рік релізу шуканого видання: ");
                 int pubYear = numb.nextInt();
-                for (int i = 0, j = 1; i < ourPub.size(); i++) {
+                j = 1;
+                for (int i = 0; i < ourPub.size(); i++) {
                     if((ourPub.get(i).getYearOfRealise() == pubYear) && (!ourPub.get(i).isTaken)){
-                        System.out.println("\t"+(j)+") "+ourPub.get(i).getName()+ " - " + ourPub.get(i).getAuthor()+ " - " + ourPub.get(i).getYearOfRealise());
+                        allPubPrint(ourPub, i, j);
                         j+=1;
                     }
                 }
+
+                if (j == 1) {
+                    System.out.println("Нажаль, за данним запитом нічого не було знайдено :(");
+                }
+
                 break;
             case 4:
                 break;

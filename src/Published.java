@@ -28,34 +28,27 @@ public class Published implements Serializable {
     }
 }
 
-//class Book extends Published{
-//
-//    public Book(String name,String author, int yearOfRealise){
-//        super(name, author, yearOfRealise);
-//        type = TypeOfPublished.Book;
-//    }
-//
-//
-//}
-//
-//class Magazine extends Published implements Serializable{
-//    public Magazine(String name,String author, int yearOfRealise){
-//        super(name, author, yearOfRealise);
-//        type = TypeOfPublished.Magazine;
-//    }
-//}
-//
-//class Abstract extends Published implements Serializable{
-//    public Abstract(String name,String author, int yearOfRealise){
-//        super(name, author, yearOfRealise);
-//        type = TypeOfPublished.Abstract;
-//    }
-//}
-//
-//class Newspaper extends Published implements Serializable{
-//
-//    public Newspaper(String name,String author, int yearOfRealise){
-//        super(name, author, yearOfRealise);
-//        type = TypeOfPublished.Newspaper;
-//    }
-//}
+class Book extends Published implements Serializable{
+    private int numbOfPages;
+    public Book(String name,String author, int yearOfRealise, TypeOfPublished type, int numbOfPages){
+        super(name, author, yearOfRealise, type);
+        this.numbOfPages = numbOfPages;
+    }
+
+    public int getNumbOfPages() {
+        return numbOfPages;
+    }
+}
+
+class Magazine extends Published implements Serializable{
+    private int editionNumber;
+    public Magazine(String name,String author, int yearOfRealise, TypeOfPublished type, int numbOfPages){
+        super(name, author, yearOfRealise, type);
+        this.editionNumber = numbOfPages;
+    }
+
+    public int getEditionNumber() {
+        return editionNumber;
+    }
+}
+

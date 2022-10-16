@@ -12,13 +12,11 @@ public class Library implements Serializable {
     }
 
     public boolean addPublished(Published item){
-        for (int i = 0; i < registry.size(); i++) {
-            if(Objects.equals(registry.get(i).getName(), item.getName())
-                    && Objects.equals(registry.get(i).getAuthor(), item.getAuthor())
-                    && registry.get(i).getYearOfRealise() == item.getYearOfRealise()){
-
+        for (Published published : registry) {
+            if (Objects.equals(published.getName(), item.getName())
+                    && Objects.equals(published.getAuthor(), item.getAuthor())
+                    && published.getYearOfRealise() == item.getYearOfRealise()) {
                 return false;
-
             }
         }
         registry.add(item);
@@ -31,10 +29,10 @@ public class Library implements Serializable {
         String []Abstract = {"Повесть о приключениях Артура Гордона Пима", "Сибилла", "Джейн Эйр" };
 
         for (String item: Books) {
-            addPublished(new Published(item, "Maxix", 2004, TypeOfPublished.Book));
+            addPublished(new Book(item, "Maxix", 2004, TypeOfPublished.Book, 100 + (int) (Math.random() * 300)));
         }
         for (String item: Newspaper) {
-            addPublished(new Published(item, "Valera", 1999, TypeOfPublished.Newspaper));
+            addPublished(new Magazine(item, "Valera", 1999, TypeOfPublished.Newspaper, 1 + (int) (Math.random() * 1000)));
         }
         for (String item: Abstract) {
             addPublished(new Published(item, "Sabir", 2022, TypeOfPublished.Abstract));

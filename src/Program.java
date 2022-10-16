@@ -8,6 +8,7 @@ public class Program {
         Scanner text = new Scanner(System.in);
 
         Library lib = menu.writeObj();
+        lib.startSettings();
 
         ArrayList<Published> ourPub = lib.getRegistry();
         ArrayList<Customer> ourCus = lib.getCustomers();
@@ -21,23 +22,26 @@ public class Program {
             System.out.println("5. Переглянути реєстр видань");
             System.out.println("6. Переглянути взяті книги");
             System.out.println("7. Пошук видання");
-            System.out.println("8. Зберегти введені дані");
-            System.out.println("9. Вийти");
+            System.out.println("8. Вийти");
             System.out.print("Вибір: ");
 
             int choice = numb.nextInt();
             switch (choice) {
                 case 1:
                     menu.addPublishedMenu(numb, text, lib);
+                    menu.saveDataMenu(lib);
                     break;
                 case 2:
                     menu.lendPubMenu(text, ourCus, lib);
+                    menu.saveDataMenu(lib);
                     break;
                 case 3:
                     menu.returnPubMenu(text, ourCus, lib);
+                    menu.saveDataMenu(lib);
                     break;
                 case 4:
                     menu.deletePubMenu(text, lib);
+                    menu.saveDataMenu(lib);
                     break;
                 case 5:
                     menu.showPubMenu(numb, ourPub);
@@ -49,9 +53,6 @@ public class Program {
                     menu.searchPubMenu(numb, text, ourPub);
                     break;
                 case 8:
-                    menu.saveDataMenu(lib);
-                    break;
-                case 9:
                     System.out.println("Папа!");
                     return;
                 default:
@@ -59,6 +60,4 @@ public class Program {
             }
         }
     }
-
-
 }
