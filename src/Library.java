@@ -31,13 +31,13 @@ public class Library implements Serializable {
         String []Abstract = {"Повесть о приключениях Артура Гордона Пима", "Сибилла", "Джейн Эйр" };
 
         for (String item: Books) {
-            addPublished(new Book(item, "Maxix", 2004));
+            addPublished(new Published(item, "Maxix", 2004, TypeOfPublished.Book));
         }
         for (String item: Newspaper) {
-            addPublished(new Newspaper(item, "Valera", 1999));
+            addPublished(new Published(item, "Valera", 1999, TypeOfPublished.Newspaper));
         }
         for (String item: Abstract) {
-            addPublished(new Abstract(item, "Karbyurator", 2022));
+            addPublished(new Published(item, "Sabir", 2022, TypeOfPublished.Abstract));
         }
     }
 

@@ -7,11 +7,11 @@ public class Published implements Serializable {
     private int yearOfRealise;
     public boolean isTaken;
 
-    public Published(String name, String author, int yearOfRealise){
+    public Published(String name, String author, int yearOfRealise, TypeOfPublished type){
         this.name = name;
         this.author = author;
         this.yearOfRealise = yearOfRealise;
-        
+        this.type = type;
         isTaken = false;
     }
 
@@ -28,34 +28,34 @@ public class Published implements Serializable {
     }
 }
 
-class Book extends Published{
-
-    public Book(String name,String author, int yearOfRealise){
-        super(name, author, yearOfRealise);
-        type = TypeOfPublished.Book;
-    }
-
-
-}
-
-class Magazine extends Published implements Serializable{
-    public Magazine(String name,String author, int yearOfRealise){
-        super(name, author, yearOfRealise);
-        type = TypeOfPublished.Magazine;
-    }
-}
-
-class Abstract extends Published implements Serializable{
-    public Abstract(String name,String author, int yearOfRealise){
-        super(name, author, yearOfRealise);
-        type = TypeOfPublished.Abstract;
-    }
-}
-
-class Newspaper extends Published implements Serializable{
-
-    public Newspaper(String name,String author, int yearOfRealise){
-        super(name, author, yearOfRealise);
-        type = TypeOfPublished.Newspaper;
-    }
-}
+//class Book extends Published{
+//
+//    public Book(String name,String author, int yearOfRealise){
+//        super(name, author, yearOfRealise);
+//        type = TypeOfPublished.Book;
+//    }
+//
+//
+//}
+//
+//class Magazine extends Published implements Serializable{
+//    public Magazine(String name,String author, int yearOfRealise){
+//        super(name, author, yearOfRealise);
+//        type = TypeOfPublished.Magazine;
+//    }
+//}
+//
+//class Abstract extends Published implements Serializable{
+//    public Abstract(String name,String author, int yearOfRealise){
+//        super(name, author, yearOfRealise);
+//        type = TypeOfPublished.Abstract;
+//    }
+//}
+//
+//class Newspaper extends Published implements Serializable{
+//
+//    public Newspaper(String name,String author, int yearOfRealise){
+//        super(name, author, yearOfRealise);
+//        type = TypeOfPublished.Newspaper;
+//    }
+//}
