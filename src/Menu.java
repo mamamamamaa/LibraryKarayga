@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
+
     public boolean readObj(Library data){
         File f = new File("library.bin");
         f.delete();
@@ -221,18 +222,6 @@ public class Menu {
         }
     }
 
-    private void allPubPrint(ArrayList<Published> ourPub, int i, int j) {
-        if(ourPub.get(i).type == TypeOfPublished.Book){
-            Book book = (Book) ourPub.get(i);
-            System.out.println("\t"+(j)+") Назва: "+book.getName()+ "\n\t   Автор: " + book.getAuthor()+ "\n\t   Рік випуску: " + book.getYearOfRealise()+"\n\t   Кількість сторінок: "+book.getNumbOfPages()+"\n");
-        } else if(ourPub.get(i).type == TypeOfPublished.Magazine){
-            Magazine mag = (Magazine) ourPub.get(i);
-            System.out.println("\t"+(j)+") Назва: "+mag.getName()+ "\n\t   Автор: " + mag.getAuthor()+ "\n\t   Рік випуску: " + mag.getYearOfRealise()+"\n\t   Номер випуску: "+mag.getEditionNumber()+"\n");
-        } else {
-            System.out.println("\t"+(j)+") Назва: "+ourPub.get(i).getName()+ "\n\t   Автор: " + ourPub.get(i).getAuthor()+ "\n\t   Рік випуску: " + ourPub.get(i).getYearOfRealise()+"\n");
-        }
-    }
-
     public void showTakenPubMenu(ArrayList<Customer> ourCus){
         if (ourCus.size() == 0){
             System.out.println("Всі видання на місці!");
@@ -311,6 +300,18 @@ public class Menu {
             System.out.println("Дані було успішно збережено!");
         } else {
             System.out.println("Дані не вдалось зберегти");
+        }
+    }
+
+    private void allPubPrint(ArrayList<Published> ourPub, int i, int j) {
+        if(ourPub.get(i).type == TypeOfPublished.Book){
+            Book book = (Book) ourPub.get(i);
+            System.out.println("\t"+(j)+") Назва: "+book.getName()+ "\n\t   Автор: " + book.getAuthor()+ "\n\t   Рік випуску: " + book.getYearOfRealise()+"\n\t   Кількість сторінок: "+book.getNumbOfPages()+"\n");
+        } else if(ourPub.get(i).type == TypeOfPublished.Magazine){
+            Magazine mag = (Magazine) ourPub.get(i);
+            System.out.println("\t"+(j)+") Назва: "+mag.getName()+ "\n\t   Автор: " + mag.getAuthor()+ "\n\t   Рік випуску: " + mag.getYearOfRealise()+"\n\t   Номер випуску: "+mag.getEditionNumber()+"\n");
+        } else {
+            System.out.println("\t"+(j)+") Назва: "+ourPub.get(i).getName()+ "\n\t   Автор: " + ourPub.get(i).getAuthor()+ "\n\t   Рік випуску: " + ourPub.get(i).getYearOfRealise()+"\n");
         }
     }
 }

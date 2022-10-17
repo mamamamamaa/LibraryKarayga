@@ -8,7 +8,6 @@ public class Program {
         Scanner text = new Scanner(System.in);
 
         Library lib = menu.writeObj();
-        lib.startSettings();
 
         ArrayList<Published> ourPub = lib.getRegistry();
         ArrayList<Customer> ourCus = lib.getCustomers();

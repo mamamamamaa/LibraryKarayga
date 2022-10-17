@@ -52,7 +52,7 @@ public class Library implements Serializable {
     }
 
     public boolean lendBook(Customer user, Published item){
-        if(registry.contains(item)){
+        if(registry.contains(item) && !item.isTaken){
             if (!customers.contains(user)){
                 customers.add(user);
             }
