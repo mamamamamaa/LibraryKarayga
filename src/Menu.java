@@ -108,14 +108,16 @@ public class Menu {
     public void lendPubMenu(Scanner text, ArrayList<Customer> ourCus, Library lib){
         System.out.print("Введіть ім'я читача: ");
         String newUserName = text.nextLine().trim();
+        System.out.print("Введіть номер телефону: ");
+        String newUserPhoneNumber = text.nextLine().trim();
         Customer isNewUser = null;
-        for (int i = 0; i < ourCus.size(); i++) {
-            if(Objects.equals(ourCus.get(i).getName(), newUserName)){
-                isNewUser = ourCus.get(i);
+        for (Customer cus : ourCus) {
+            if (Objects.equals(cus.getPhoneNumber(), newUserPhoneNumber)) {
+                isNewUser = cus;
             }
         }
         System.out.print("Введіть назву книги яку ви хочете отримати: ");
-        if(lib.lendBook(isNewUser == null ? new Customer(newUserName) : isNewUser, text.nextLine().trim())){
+        if(lib.lendBook(isNewUser == null ? new Customer(newUserName, newUserPhoneNumber) : isNewUser, text.nextLine().trim())){
             System.out.println("Ось ваше видання :)");
         }else {
             System.out.println("Нажаль, такого видання в нас немає або воно вже зайняте :(");
@@ -227,7 +229,7 @@ public class Menu {
             System.out.println("Всі видання на місці!");
         }
         for (int i = 0; i < ourCus.size(); i++) {
-            System.out.println("Користувач: "+ourCus.get(i).getName()+"\nЗаборогованність: ");
+            System.out.println("Користувач: "+ourCus.get(i).getName()+"\nНомер телефону: "+ourCus.get(i).getPhoneNumber()+"\nЗаборогованність: ");
             userPubList(ourCus, i);
         }
     }

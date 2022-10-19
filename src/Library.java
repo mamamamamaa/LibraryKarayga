@@ -90,7 +90,7 @@ public class Library implements Serializable {
 
     public Published getPublishedByName(String name) {
         for(Published item : registry){
-            if(Objects.equals(item.getName(), name)){
+            if(Objects.equals(item.getName().toLowerCase(), name.toLowerCase())){
                 return item;
             }
         }
