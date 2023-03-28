@@ -1,2 +1,0 @@
-# LibraryKarayga
-university OOP project
